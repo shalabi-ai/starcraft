@@ -1,6 +1,7 @@
 import unittest
 import sc2reader
 from replay.replay import CoOpReplay
+from replay.replay_factory import ReplayFactory
 from reports.resources.resource_bank import ResourceBankReport
 
 class MyTestCase(unittest.TestCase):
@@ -11,7 +12,8 @@ class MyTestCase(unittest.TestCase):
         coopReplay = CoOpReplay(replay2)
         players = coopReplay.getPlayers()
 
-        report = ResourceBankReport(file_path)
+        tracker_events = ReplayFactory.replay_from_s2protocol(file_path)
+        report = ResourceBankReport(tracker_events)
         report.generate_report(players)
         self.assertEqual(True, True)  # add assertion here
 

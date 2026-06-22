@@ -6,8 +6,8 @@ from replay.economy_processor import EconomyProcessor
 
 
 class EconomyReport:
-    def __init__(self, file_path):
-        self.file_path = file_path
+    def __init__(self, tracker_events):
+        self.tracker_events = tracker_events
 
     def generate_report(self, players: list[Player]):
         fig, axes = plt.subplots(
@@ -18,10 +18,7 @@ class EconomyReport:
         if len(players) == 1:
             axes = [axes]
 
-        tracker_events = list(
-            ReplayFactory.replay_from_s2protocol(self.file_path)
-        )
-        economy_processor = EconomyProcessor(tracker_events)
+        economy_processor = EconomyProcessor(self.tracker_events)
         for player, ax in zip(players, axes):
             df = economy_processor.extract_player_stats(player.id)
             self.plot(ax, df, player.name)

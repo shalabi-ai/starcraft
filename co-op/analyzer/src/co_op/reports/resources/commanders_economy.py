@@ -11,8 +11,8 @@ from reports.resources.economy_report import EconomyReport
 
 class CommandersEconomyReport(EconomyReport):
     # get tracker_events from ReplayFactory.replay_from_s2protocol
-    def __init__(self, file_path):
-        super().__init__(file_path)
+    def __init__(self, tracker_events):
+        super().__init__(tracker_events)
 
     def plot(self, ax: Axes, df: DataFrame, player_name: str):
         ax.plot(

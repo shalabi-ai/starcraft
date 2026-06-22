@@ -12,8 +12,8 @@ from reports.resources.resource_bank_analysis import ResourceBankAnalysis
 
 
 class ResourceBankReport(EconomyReport):
-    def __init__(self, file_path):
-        super().__init__(file_path)
+    def __init__(self, tracker_events):
+        super().__init__(tracker_events)
 
     def plot(self, ax: Axes, player_df: DataFrame, player_name: str):
         p = (
