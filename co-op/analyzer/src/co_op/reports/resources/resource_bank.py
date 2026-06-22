@@ -226,8 +226,8 @@ class ResourceBankReport:
         stats_text = (
             f"Game Duration       {game_minutes:6.1f}\n"
             f"Grade       {grade}\n"
-            f"SpendEfficiency    {spend_efficiency:6.1f}%\n"
-            f"FloatScore  {float_score:8,.1f}\n"
+            f"Spend Efficiency    {spend_efficiency:6.1f}%\n"
+            f"Float Score  {float_score:8,.1f}\n" # custom metric measuring how much resource float accumulated over time. higher value means worse spending discipline.
             f"\nCollected\n"
            # f"Avg Float   {avg_float:8,.0f}\n"
             f"M     {total_minerals_collected:,.0f}\n"
