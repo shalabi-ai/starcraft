@@ -79,17 +79,6 @@ class ResourceBankReport:
         final_minerals = p["minerals_current"].iloc[-1]
         final_gas = p["vespene_current"].iloc[-1]
 
-        pct_above_1000 = (
-                (p["minerals_current"] > 1000).mean() * 100
-        )
-
-        pct_above_2000 = (
-                (p["minerals_current"] > 2000).mean() * 100
-        )
-
-        pct_above_3000 = (
-                (p["minerals_current"] > 3000).mean() * 100
-        )
 
         # Float Area (integral)
         dt = p["seconds"].diff().fillna(0)
