@@ -1,0 +1,64 @@
+| Mutator                      | Short Description                               |
+| ---------------------------- | ----------------------------------------------- |
+| Afraid of the Dark           | Vision limited to camera area                   |
+| Aggressive Deployment        | Extra enemy attack waves drop in                |
+| Alien Incubation             | Enemies spawn Broodlings on death               |
+| Avenger                      | Enemies grow stronger when nearby units die     |
+| Barrier                      | First hit triggers a temporary shield           |
+| Black Death                  | Units spread a deadly plague                    |
+| Blizzard                     | Freezing storms move across map                 |
+| Boom Bots                    | Suicide robots seek player bases                |
+| Chaos Studios                | Mutators rotate randomly during mission         |
+| Concussive Attacks           | Enemy attacks slow your units                   |
+| Darkness                     | Entire map starts under fog                     |
+| Diffusion                    | Damage dealt is reflected to nearby allies      |
+| Double Edged                 | Your damage also hurts your units               |
+| Eminent Domain               | Enemy captures your defensive structures        |
+| Evasive Maneuvers            | Enemy air units evade attacks                   |
+| Fatal Attraction             | Enemies pull nearby player units                |
+| Fear                         | Units randomly flee when damaged                |
+| Fireworks                    | Enemy deaths cause explosions                   |
+| Gift Exchange                | Enemies leave gifts with random effects         |
+| Going Nuclear                | Random nukes target player units                |
+| Hardened Will                | Enemy units gain damage reduction               |
+| Heroes from the Storm        | Powerful hero units accompany Amon              |
+| Inspiration                  | Enemies near special units attack faster        |
+| Just Die!                    | Enemies revive after death                      |
+| Kill Bots                    | Bots demand unit sacrifices                     |
+| Laser Drill                  | Enemy laser attacks players constantly          |
+| Lava Burst                   | Lava eruptions damage units                     |
+| Life Leech                   | Enemies heal from damage dealt                  |
+| Long Range                   | Enemy attacks gain extra range                  |
+| Lucky Envelopes              | Enemies drop beneficial pickups                 |
+| Mag-nificent                 | Mag Mines appear around map                     |
+| Micro Transactions           | Units consume resources when commanded          |
+| Mineral Shields              | Mineral patches become shielded                 |
+| Minesweeper                  | Spider mines litter the battlefield             |
+| Missile Command              | Missiles periodically bombard players           |
+| Moment of Silence            | Enemy deaths stun nearby units                  |
+| Mutually Assured Destruction | Enemy nukes on death                            |
+| Naughty List                 | Units accumulate damage stacks                  |
+| Orbital Strike               | Orbital bombardments target units               |
+| Outbreak                     | Infested spawn continuously                     |
+| Photon Overload              | Enemy structures attack nearby units            |
+| Polarity                     | Some enemies can only be attacked by one player |
+| Power Overwhelming           | Enemy spellcasters gain extra abilities         |
+| Propagators                  | Self-replicating monsters hunt players          |
+| Purifier Beam                | Invincible beam chases units                    |
+| Random                       | Random mutator selection                        |
+| Scorched Earth               | Dead enemies leave damaging fire                |
+| Self Destruction             | Enemies explode on death                        |
+| Sharing is Caring            | Supply is shared between allies                 |
+| Shortsighted                 | Very limited unit vision                        |
+| Slim Pickings                | Resource gathering severely reduced             |
+| Speed Freaks                 | Enemies move much faster                        |
+| Temporal Field               | Periodic slowing fields                         |
+| Time Warp                    | Enemy time warps slow player units              |
+| Transmutation                | Enemies evolve into stronger units              |
+| Trick or Treat               | Random buffs and debuffs                        |
+| Turkey Shoot                 | Enemy air units take extra damage               |
+| Twister                      | Tornadoes roam the map                          |
+| Void Reanimators             | Reanimators revive dead enemies                 |
+| Void Rifts                   | Rifts spawn enemies across map                  |
+| Walking Infested             | Dead enemies spawn infested                     |
+| We Move Unseen               | All enemy units are cloaked                     |
