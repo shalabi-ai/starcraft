@@ -4,13 +4,14 @@ from pandas import DataFrame
 from replay.replay_factory import ReplayFactory
 from replay.economy_processor import EconomyProcessor
 
+from abc import ABC, abstractmethod
 
-class EconomyReport:
+class EconomyReport(ABC):
     def __init__(self, tracker_events):
         self.tracker_events = tracker_events
 
     def generate_report(self, players: list[Player]):
-        fig, axes = plt.subplots(
+        _, axes = plt.subplots(
             1,
             len(players),
             figsize=(8 * (len(players) + 1), 7)
@@ -26,5 +27,6 @@ class EconomyReport:
         plt.tight_layout()
         plt.show()
 
+    @abstractmethod
     def plot(self, ax: plt.Axes, df: DataFrame, player_name: str):
-        raise NotImplementedError
+        pass

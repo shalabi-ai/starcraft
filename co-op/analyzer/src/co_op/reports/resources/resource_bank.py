@@ -10,10 +10,9 @@ from reports.resources.economy_report import EconomyReport
 from reports.resources.resource_bank_analysis_model import ResourceBankAnalysisModel
 from reports.resources.resource_bank_analysis import ResourceBankAnalysis
 
-
 class ResourceBankReport(EconomyReport):
-    def __init__(self, tracker_events):
-        super().__init__(tracker_events)
+   #def __init__(self, tracker_events):
+   #     super().__init__(tracker_events)
 
     def plot(self, ax: Axes, player_df: DataFrame, player_name: str):
         p = (
@@ -22,6 +21,8 @@ class ResourceBankReport(EconomyReport):
             .reset_index(drop=True)
             .copy()
         )
+        if p.empty:
+            return
         analysis = ResourceBankAnalysis(p)
         model = analysis.get_resource_bank()
 
@@ -29,14 +30,14 @@ class ResourceBankReport(EconomyReport):
         # Plot
         # ====================================
 
-        ax.plot(
+        minerals_line, = ax.plot(
             p["seconds"],
             p["minerals_current"],
             label="Minerals Bank",
             linewidth=2
         )
 
-        ax.plot(
+        gas_line,  = ax.plot(
             p["seconds"],
             p["vespene_current"],
             label="Gas Bank",
@@ -78,7 +79,7 @@ class ResourceBankReport(EconomyReport):
             alpha=0.35
         )
 
-        ResourceBankReport.fill_region(ax, p)
+        self.fill_region(ax, p)
 
         ax.set_title(
             f"{player_name} (Grade {model.grade})"
@@ -89,9 +90,7 @@ class ResourceBankReport(EconomyReport):
 
         ax.grid(True, alpha=0.25)
 
-        analysis = ResourceBankAnalysis(p)
-        model = analysis.get_resource_bank()
-        stats_text = ResourceBankReport.get_analysis_text(model)
+        stats_text = self.get_analysis_text(model)
 
         ax.text(
             1.02,
@@ -106,8 +105,8 @@ class ResourceBankReport(EconomyReport):
         )
 
         legend_handles = [
-            ax.lines[0],
-            ax.lines[1],
+            minerals_line,
+            gas_line,
             Patch(alpha=0.08, label="High Float (>2000M)")
         ]
 
@@ -140,8 +139,8 @@ class ResourceBankReport(EconomyReport):
         return stats_text
 
     @staticmethod
-    def fill_region(ax, p:DataFrame):
-        high_float = p["minerals_current"] > 2000
+    def fill_region(ax: Axes, p:DataFrame):
+        high_float = (p["minerals_current"] + p["vespene_current"]) > 2000
 
         start = None
 
