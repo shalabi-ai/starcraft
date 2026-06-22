@@ -223,12 +223,6 @@ class ResourceBankReport:
         spent_minerals = total_minerals_collected - final_minerals
         spent_gas = total_gas_collected - final_gas
 
-        unspent_pct = (
-                              (final_minerals + final_gas)
-                              /
-                              (total_minerals_collected + total_gas_collected)
-                      ) * 100
-
         stats_text = (
             f"Game Duration       {game_minutes:6.1f}\n"
             f"Grade       {grade}\n"
@@ -241,8 +235,7 @@ class ResourceBankReport:
             f"\nSpent\n"
             f"M     {spent_minerals:,.0f}\n"
             f"G     {spent_gas:,.0f}\n"
-            f"\nunspent     {unspent_pct:6.0f}%\n"
-            f"\nAverage Bank\n"
+            f"\nAvg Bank\n"
             f"M       {avg_minerals:8,.0f}\n"
             f"G       {avg_gas:8,.0f}\n"
             f"\nFinal Bank\n"
@@ -250,7 +243,7 @@ class ResourceBankReport:
             f"G     {final_gas:8,.0f}\n"
             f"\nPeak Income/min\n"
             f"M       {peak_m_income:8,.0f}\n"
-            f"G       {peak_g_income:8,.0f}\n"
+            f"G       {peak_g_income:8,.0f}"
         )
 
         ax.text(
