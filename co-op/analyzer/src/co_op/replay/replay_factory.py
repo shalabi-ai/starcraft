@@ -22,4 +22,4 @@ class ReplayFactory:
 
         tracker_events = protocol.decode_replay_tracker_events(contents)
 
-        return tracker_events
+        return list(tracker_events)

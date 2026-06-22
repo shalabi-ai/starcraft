@@ -6,55 +6,16 @@ from replay.economy_processor import EconomyProcessor
 import matplotlib.pyplot as plt
 from replay.replay_factory import ReplayFactory
 from matplotlib.patches import Patch
+from reports.resources.economy_report import EconomyReport
 from reports.resources.resource_bank_analysis_model import ResourceBankAnalysisModel
 from reports.resources.resource_bank_analysis import ResourceBankAnalysis
 
 
-class ResourceBankReport:
+class ResourceBankReport(EconomyReport):
     def __init__(self, file_path):
-        self.file_path = file_path
+        super().__init__(file_path)
 
-
-    def report(self, players: list[Player]):
-        fig, axes = plt.subplots(
-            1,
-            len(players),
-            figsize=(12 * len(players), 7),
-            squeeze=False
-        )
-        axes = axes.flatten()
-
-        tracker_events = list(
-            ReplayFactory.replay_from_s2protocol(self.file_path)
-        )
-        economy_processor = EconomyProcessor(tracker_events)
-        for player, ax in zip(players, axes):
-            df = economy_processor.extract_player_stats(tracker_events, player.id)
-            #df.sort_values("seconds")
-            ResourceBankReport.plot(ax, df, player.name)
-
-        plt.suptitle(
-            "Resource Bank Analysis",
-            fontsize=16
-        )
-        plt.subplots_adjust(right=0.85)
-        plt.tight_layout()
-        plt.show()
-
-
-    @staticmethod
-    def economy_grade(score):
-        if score < 100:
-            return "A"
-        elif score < 250:
-            return "B"
-        elif score < 500:
-            return "C"
-        else:
-            return "D"
-
-    @staticmethod
-    def plot(ax: Axes, player_df, player_name):
+    def plot(self, ax: Axes, player_df: DataFrame, player_name: str):
         p = (
             player_df
             .sort_values("seconds")

@@ -6,14 +6,14 @@ class EconomyProcessor:
     def __init__(self, tracker_events):
         self.tracker_events = tracker_events
 
-    def extract_player_stats(self, tracker_events, player_id):
+    def extract_player_stats(self, player_id):
         """
         Extract all SPlayerStatsEvent rows.
         """
 
         rows = []
 
-        for event in tracker_events:
+        for event in self.tracker_events:
 
             if event.get("_event") != "NNet.Replay.Tracker.SPlayerStatsEvent":
                 continue
