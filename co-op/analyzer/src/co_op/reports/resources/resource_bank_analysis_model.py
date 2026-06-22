@@ -1,0 +1,16 @@
+class ResourceBankAnalysisModel:
+    game_minutes: float
+    grade: str
+    spend_efficiency: float
+    #float_score: float
+    avg_float: float
+    total_minerals_collected: int
+    total_gas_collected: int
+    spent_minerals: int
+    spent_gas: int
+    avg_minerals: float
+    avg_gas: float
+    final_minerals: int
+    final_gas: int
+    peak_minerals_collection_rate: float
+    peak_gas_collection_rate: float

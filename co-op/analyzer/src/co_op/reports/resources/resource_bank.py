@@ -6,6 +6,9 @@ from replay.economy_processor import EconomyProcessor
 import matplotlib.pyplot as plt
 from replay.replay_factory import ReplayFactory
 from matplotlib.patches import Patch
+from reports.resources.resource_bank_analysis_model import ResourceBankAnalysisModel
+from reports.resources.resource_bank_analysis import ResourceBankAnalysis
+
 
 class ResourceBankReport:
     def __init__(self, file_path):
@@ -58,43 +61,8 @@ class ResourceBankReport:
             .reset_index(drop=True)
             .copy()
         )
-
-        # ====================================
-        # Metrics
-        # ====================================
-
-        p["float_score"] = (
-                p["minerals_current"]
-                + 2.0 * p["vespene_current"]
-        )
-
-        avg_float = p["float_score"].mean()
-
-        avg_minerals = p["minerals_current"].mean()
-        avg_gas = p["vespene_current"].mean()
-
-        max_minerals = p["minerals_current"].max()
-        max_gas = p["vespene_current"].max()
-
-        final_minerals = p["minerals_current"].iloc[-1]
-        final_gas = p["vespene_current"].iloc[-1]
-
-
-        # Float Area (integral)
-        dt = p["seconds"].diff().fillna(0)
-
-        float_area = (
-                p["float_score"] * dt
-        ).sum()
-
-
-        game_length = max(p["seconds"].max(), 1)
-
-        float_score = (
-                              (float_area / game_length) * 60
-                      ) / 1000
-        grade = ResourceBankReport.economy_grade(float_score)
-
+        analysis = ResourceBankAnalysis(p)
+        model = analysis.get_resource_bank()
 
         # ====================================
         # Plot
@@ -152,7 +120,7 @@ class ResourceBankReport:
         ResourceBankReport.fill_region(ax, p)
 
         ax.set_title(
-            f"{player_name} (Grade {grade})"
+            f"{player_name} (Grade {model.grade})"
         )
 
         ax.set_xlabel("Seconds")
@@ -160,80 +128,9 @@ class ResourceBankReport:
 
         ax.grid(True, alpha=0.25)
 
-        total_minerals_collected = (
-                (p["minerals_collection_rate"] / 60) * dt
-        ).sum()
-
-        # Collection Rate = resources/minute
-        # ÷ 60            = resources/second
-        # × dt            = resources collected during interval
-        # 1200 minerals/min
-        # 20 seconds
-        #
-        # becomes:
-        #
-        # 1200 / 60 = 20 minerals/sec
-        #
-        # 20 × 20 = 400 minerals collected
-        total_gas_collected = (
-                (p["vespene_collection_rate"] / 60) * dt
-        ).sum()
-
-        final_bank = (
-                final_minerals +
-                final_gas
-        )
-
-        total_collected = (
-                total_minerals_collected +
-                total_gas_collected
-        )
-
-        weighted_bank = (
-                final_minerals +
-                2 * final_gas
-        )
-
-        weighted_collected = (
-                total_minerals_collected +
-                2 * total_gas_collected
-        )
-
-        spend_efficiency = (
-                100 *
-                (1 - weighted_bank / weighted_collected)
-        )
-
-        peak_m_income = p["minerals_collection_rate"].max()
-        peak_g_income = p["vespene_collection_rate"].max()
-
-        game_minutes = p["seconds"].max() / 60
-
-        spent_minerals = total_minerals_collected - final_minerals
-        spent_gas = total_gas_collected - final_gas
-
-        stats_text = (
-            f"Game Duration       {game_minutes:6.1f}\n"
-            f"Grade       {grade}\n"
-            f"Spend Efficiency    {spend_efficiency:6.1f}%\n"
-            f"Float Score  {float_score:8,.1f}\n" # custom metric measuring how much resource float accumulated over time. higher value means worse spending discipline.
-            f"\nCollected\n"
-           # f"Avg Float   {avg_float:8,.0f}\n"
-            f"M     {total_minerals_collected:,.0f}\n"
-            f"G     {total_gas_collected:,.0f}\n"
-            f"\nSpent\n"
-            f"M     {spent_minerals:,.0f}\n"
-            f"G     {spent_gas:,.0f}\n"
-            f"\nAvg Bank\n"
-            f"M       {avg_minerals:8,.0f}\n"
-            f"G       {avg_gas:8,.0f}\n"
-            f"\nFinal Bank\n"
-            f"M     {final_minerals:8,.0f}\n"
-            f"G     {final_gas:8,.0f}\n"
-            f"\nPeak Income/min\n"
-            f"M       {peak_m_income:8,.0f}\n"
-            f"G       {peak_g_income:8,.0f}"
-        )
+        analysis = ResourceBankAnalysis(p)
+        model = analysis.get_resource_bank()
+        stats_text = ResourceBankReport.get_analysis_text(model)
 
         ax.text(
             1.02,
@@ -254,6 +151,32 @@ class ResourceBankReport:
         ]
 
         ax.legend(handles=legend_handles, loc="upper left")
+
+    @staticmethod
+    def get_analysis_text(model: ResourceBankAnalysisModel) -> str:
+        stats_text = (
+            f"Game Duration       {model.game_minutes:6.1f}\n"
+            f"Grade       {model.grade}\n"
+            f"Spend Efficiency    {model.spend_efficiency:6.1f}%\n"
+            f"Avg Float  {model.avg_float:8,.1f}\n" # custom metric measuring how much resource float accumulated over time. higher value means worse spending discipline.
+            f"\nCollected\n"
+            # f"Avg Float   {avg_float:8,.0f}\n"
+            f"M     {model.total_minerals_collected:,.0f}\n"
+            f"G     {model.total_gas_collected:,.0f}\n"
+            f"\nSpent\n"
+            f"M     {model.spent_minerals:,.0f}\n"
+            f"G     {model.spent_gas:,.0f}\n"
+            f"\nAvg Bank\n"
+            f"M       {model.avg_minerals:8,.0f}\n"
+            f"G       {model.avg_gas:8,.0f}\n"
+            f"\nFinal Bank\n"
+            f"M     {model.final_minerals:8,.0f}\n"
+            f"G     {model.final_gas:8,.0f}\n"
+            f"\nPeak Income/min\n"
+            f"M       {model.peak_minerals_collection_rate:8,.0f}\n"
+            f"G       {model.peak_gas_collection_rate:8,.0f}"
+        )
+        return stats_text
 
     @staticmethod
     def fill_region(ax, p:DataFrame):
