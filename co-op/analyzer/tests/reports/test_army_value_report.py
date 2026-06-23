@@ -3,23 +3,12 @@ from replay.replay import CoOpReplay
 from replay.army_analyser import ArmyAnalyser
 from replay.army_processor import ArmyProcessor
 import sc2reader
+from reports.army_value_report import ArmyValueReport
 
 
 class MyTestCase(unittest.TestCase):
-    def test_army_state_timeline(self):
-        replay1 = sc2reader.load_replay("/home/mohammad/StarCraft II/Accounts/1176921989/2-S2-1-11021412/Replays/commanders/nova/abathur/Chain of Ascension-375.SC2Replay")
 
-        processor = ArmyProcessor(replay1)
-        units, unit_events = processor.process_replay()
-
-        coopReplay = CoOpReplay(replay1)
-        players = coopReplay.getPlayerMap()
-
-        analyser = ArmyAnalyser(unit_events, players)
-        df = analyser.army_state_timeline()
-        self.assertEqual(True, True)  # add assertion here
-
-    def test_army_value_timeline(self):
+    def test_army_value_report(self):
         replay1 = sc2reader.load_replay("/home/mohammad/StarCraft II/Accounts/1176921989/2-S2-1-11021412/Replays/commanders/nova/abathur/Chain of Ascension-375.SC2Replay")
 
         processor = ArmyProcessor(replay1)
@@ -30,6 +19,10 @@ class MyTestCase(unittest.TestCase):
 
         analyser = ArmyAnalyser(unit_events, players)
         df = analyser.army_value_timeline()
+
+        report = ArmyValueReport()
+        report.plot_army_value_timeline(df)
+
         self.assertEqual(True, True)  # add assertion here
 
 
