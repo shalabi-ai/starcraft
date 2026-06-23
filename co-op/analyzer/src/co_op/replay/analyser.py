@@ -1,6 +1,7 @@
 from collections import Counter, defaultdict
 
 from models.player import Player
+from replay import FRAME_RATE
 
 
 class ReplayAnalyser:
@@ -69,7 +70,7 @@ class ReplayAnalyser:
         timeline = defaultdict(int)
 
         for event in self.kill_events:
-            minute = int(event["time"] / (22.4 * 60))
+            minute = int(event["time"] / (FRAME_RATE * 60))
             timeline[minute] += 1
 
         return dict(sorted(timeline.items()))
@@ -78,7 +79,7 @@ class ReplayAnalyser:
         timeline = defaultdict(lambda: defaultdict(int))
 
         for event in self.kill_events:
-            minute = int(event["time"] / (22.4 * 60))
+            minute = int(event["time"] / (FRAME_RATE * 60))
 
             player = self.players.get(event["killer_player"])
             if not player:

@@ -2,6 +2,7 @@ import pandas as pd
 from pandas.core.interchange.dataframe_protocol import DataFrame
 from sc2reader.resources import Replay
 from models.unit import Unit
+from replay import FRAME_RATE
 from replay.replay import CoOpReplay
 
 class ArmyProcessor:
@@ -14,7 +15,6 @@ class ArmyProcessor:
 
         ("CreepTumorBurrowed", "CreepTumorUsed"),
     }
-    FRAME_RATE = 16
 
     def is_cosmetic_morph(self, old_type, new_type):
         if old_type == new_type:
@@ -33,7 +33,7 @@ class ArmyProcessor:
         self.replay = replay
 
     def frame_to_seconds(self, frame):
-        return frame / self.FRAME_RATE
+        return frame / FRAME_RATE
 
     def process_replay(self):
 

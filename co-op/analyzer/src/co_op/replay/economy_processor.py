@@ -2,6 +2,9 @@ import pandas as pd
 from s2protocol import versions
 from mpyq import MPQArchive
 
+from replay import FRAME_RATE
+
+
 class EconomyProcessor:
     def __init__(self, tracker_events):
         self.tracker_events = tracker_events
@@ -25,7 +28,7 @@ class EconomyProcessor:
 
             rows.append(
                 {
-                    "seconds": event["_gameloop"] / 22.4,
+                    "seconds": event["_gameloop"] / FRAME_RATE,
 
                     "minerals_current":
                         stats.get("m_scoreValueMineralsCurrent", 0),
