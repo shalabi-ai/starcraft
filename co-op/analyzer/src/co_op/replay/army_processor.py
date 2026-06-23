@@ -14,7 +14,7 @@ class ArmyProcessor:
 
         ("CreepTumorBurrowed", "CreepTumorUsed"),
     }
-    FRAME_RATE = 22.4
+    FRAME_RATE = 16
 
     def is_cosmetic_morph(self, old_type, new_type):
         if old_type == new_type:
