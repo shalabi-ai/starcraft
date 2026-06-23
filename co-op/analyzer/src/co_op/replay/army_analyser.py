@@ -2,14 +2,15 @@ from collections import defaultdict
 
 import pandas as pd
 from pandas import DataFrame
-from replay import unit_value
+from replay.army_processor import ArmyProcessor
 from replay.unit_value import UnitValue
 
 
 class ArmyAnalyser:
-    def __init__(self, unit_events, players):
+    def __init__(self, units, unit_events, players):
         self.unit_events = unit_events
         self.players = players
+        self.units = units
 
     def army_state_timeline(self, snapshot_interval_seconds=30):
 
@@ -92,7 +93,6 @@ class ArmyAnalyser:
 
         return pd.DataFrame(rows)
 
-
     def army_value_timeline(self, snapshot_interval_seconds=30)->pd.DataFrame:
         rows = []
         current_army_value = defaultdict(int)
@@ -115,10 +115,23 @@ class ArmyAnalyser:
 
         next_snapshot = 0
 
+        army_processor = ArmyProcessor(None)
+        temporary_units_set = army_processor.temporary_units_set(self.units)
+
         for event in events:
             player = event["player"]
             if player not in self.players:
                 continue
+
+            unit_id = event["unit_id"]
+            unit = self.units.get(unit_id)
+
+            if unit.is_worker or unit.is_building:
+                continue
+
+            if unit.current_type in temporary_units_set:
+                if not unit.is_army:
+                    continue
 
             current_time = event["time"]
 
@@ -135,12 +148,12 @@ class ArmyAnalyser:
                 next_snapshot += snapshot_interval_seconds
 
             if event["action"] == "born":
-                unit = event["unit_type"]
-                current_army_value[player] += unit_value.get(unit)
+                unit_type = event["unit_type"]
+                current_army_value[player] += unit_value.get(unit_type)
 
             elif event["action"] == "died":
-                unit = event["unit_type"]
-                current_army_value[player] -= unit_value.get(unit)
+                unit_type = event["unit_type"]
+                current_army_value[player] -= unit_value.get(unit_type)
 
             elif event["action"] == "morph":
                 old_type = event["old_type"]

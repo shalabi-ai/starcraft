@@ -1,10 +1,8 @@
 import pandas as pd
 from pandas.core.interchange.dataframe_protocol import DataFrame
 from sc2reader.resources import Replay
-
 from models.unit import Unit
 from replay.replay import CoOpReplay
-
 
 class ArmyProcessor:
     IGNORE_MORPHS = {
@@ -236,4 +234,17 @@ class ArmyProcessor:
             ]
         )
 
+    def temporary_units_set(self, all_units: dict[int, Unit], min_instances=10) -> set[str]:
+
+        report = self.temporary_units(
+            all_units,
+            min_instances
+        )
+
+        return set(
+            report.loc[
+                report["is_temporary"],
+                "unit_type"
+            ]
+        )
 

@@ -6,7 +6,6 @@ class ArmyValueReport:
         plt.figure(figsize=(12, 6))
 
         for player, player_df in df.groupby("player"):
-
             commander = player_df["commander"].iloc[0]
 
             plt.plot(
@@ -15,7 +14,7 @@ class ArmyValueReport:
                 label=f"{commander} (P{player})"
             )
 
-        plt.title("Army Value Timeline")
+        plt.title("Army Value (Minerals + Gas Invested)")
         plt.xlabel("Time (seconds)")
         plt.ylabel("Army Value")
         plt.grid(True)

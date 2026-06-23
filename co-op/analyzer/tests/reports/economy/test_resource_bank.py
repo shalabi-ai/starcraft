@@ -3,10 +3,14 @@ import sc2reader
 from replay.replay import CoOpReplay
 from replay.replay_factory import ReplayFactory
 from reports.resources.resource_bank import ResourceBankReport
+from tests import TESTS_FILES_PATH
+
 
 class MyTestCase(unittest.TestCase):
     def test_resource_bank_report(self):
-        file_path = "/home/mohammad/StarCraft II/Accounts/1176921989/2-S2-1-11021412/Replays/commanders/nova/abathur/Chain of Ascension-375.SC2Replay"
+        #file_path = "/home/mohammad/StarCraft II/Accounts/1176921989/2-S2-1-11021412/Replays/commanders/nova/abathur/Chain of Ascension-375.SC2Replay"
+        #file_path ="/home/mohammad/StarCraft II/Accounts/1176921989/2-S2-1-11021412/Replays/commanders/tychus/abathur/Scythe of Amon/Scythe of Amon-hard-393.SC2Replay"
+        file_path = TESTS_FILES_PATH
 
         replay2 = sc2reader.load_replay(file_path)
         coopReplay = CoOpReplay(replay2)
