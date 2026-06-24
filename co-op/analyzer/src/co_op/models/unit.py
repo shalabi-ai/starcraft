@@ -8,11 +8,12 @@ class Unit:
 
     current_type: str
 
+    # TODO: refact to is_commander_ability
     commander_ability = False
 
-    is_army: bool
-    is_building: bool
-    is_worker: bool
+    is_army = False
+    is_building = False
+    is_worker = False
     is_temporary = False
     is_commander_unit = False
     is_commander = False

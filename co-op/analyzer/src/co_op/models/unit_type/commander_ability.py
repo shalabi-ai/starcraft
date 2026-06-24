@@ -1,183 +1,123 @@
+'''
+Commander Ability Asset
+An object, unit, projectile, summon, marker, support entity, or effect created by a commander ability, top-bar ability,
+or commander-unit ability. These entities exist primarily to execute or represent the ability and are not considered
+part of the player's persistent army.
+'''
 COMMANDER_ABILITY = {
+    # Nova
+    "HealingDrone",
+    "NovaACLaserTurret",
+    "NovaBoombot",
+    "NovaBoombotBurrowed",
+    "NovaDefensiveMatrixDrone",
+    "NovaGriffinBombingRunTargeter",
+    "NovaGriffinBombingRunStrafer",
+    "NovaGriffinTransportUnit",
+    "NovaReviveBeacon",
+    "NovaCoopDecoy",
+
     # Abathur
-    "BiomassPickup",
     "ToxicNest",
     "ToxicNestBurrowed",
+    "Brutalisk",
+    "HotSLeviathan",
+    "BrutaliskPlacement",
     "AbathurSymbioteBrutalisk",
     "AbathurSymbioteLeviathan",
-    "BrutaliskPlacement",
 
     # Alarak
-    "ACHeroSpawnPlacement",
-    "SOAMothershipv4",
-    "HealingDrone",
+    "AlarakReviveBeacon",
 
     # Artanis
     "CommanderPrestigeArtanisOrbitalStrikesArchon",
     "CommanderPrestigeArtanisOrbitalStrikesArchonPrecursor",
-
+    "SOAMothershipv4",
+    "SoACasterArtanis",
     "SOAPylonPowerUnit",
     "SOAPylonPowerAllyUnit",
-    "SoACasterArtanis",
+
 
     # Dehaka
+    "DehakaCoopClone",
     "DehakaDakrun",
     "DehakaGlevig",
     "DehakaMurvar",
 
-    # Fenix champion system
-    "FenixKaldalisZealot",
-    "FenixTaldarinImmortal",
-    "FenixWarbringerColossus",
-    "FenixMojoScout",
-    "FenixTalisAdept",
-    "FenixClolarionCarrier",
 
-    # Active abilities
+    # Fenix
     "FenixAdeptShade",
     "FenixTalisAdeptPhaseShift",
-
     "FenixClolarionBomber",
     "FenixClolarionInterceptor",
 
-    "SentryFenixPhasing",
-
     # Han & Horner
-    "HHMercenarySpaceStation",
-
-    "HHBattlecruiser_SpawnerUnit",
-    "HHWraith_SpawnerUnit",
-    "HHRaven_SpawnerUnit",
-    "HHMagneticMine_SpawnerUnit",
-
     "HHBomber",
     "HHGriffon",
-
     "HHMagneticMine",
     "HHMagneticMinePrep",
-
-    "CODFlatbedTruck",
-    "CODFlatbedTruckFlying",
-
-    "HHD8CenterCluster",
-    "HHD8CenterClusterUpgrade",
-    "HHD8ClusterBomb",
-    "HHD8SingleCluster",
-
-    "HHScrapPickup",
-
-    "HornerAirFleetStrafer",
+    "HHMercenarySpaceStation",
     "HornerAirFleetTargeter",
+    "HornerAirFleetStrafer",
+    "HotSLeviathan",
 
-    # Karax
-    "SOAPurifierBeamUnit",
-    "SOAThermalLanceTargeter",
-
-    "CarrierRepairDrone",
-
-    "SoACasterKarax",
-
-    # Kerrigan
-    "KerriganVoidCoopEconDrop1",
-    "KerriganVoidCoopEconDrop2",
-    "KerriganVoidCoopEconDrop3",
-    "KerriganVoidCoopEconDrop4",
-    "KerriganVoidCoopEconDrop5",
-    "KerriganVoidCoopEconDropLT1",
-
-    # meng
+    # Mengsk
+    "CoopCasterMengsk",
+    "NukeMengsk",
     "CommanderPrestigeMengskTrooperBoom",
 
-    "TrooperMengskWeaponAAPickup",
-    "TrooperMengskWeaponImprovedPickup",
-
-    "NukeMengsk",
-
-    # Nova
-    "NovaACLaserTurret",
-    "NovaBoombotBurrowed",
-    "NovaDefensiveMatrixDrone",
-    "NovaGriffinBombingRunStrafer",
-    "NovaGriffinBombingRunTargeter",
-    "NovaGriffinTransportUnit",
-    "HealingDrone",
+    # Kerrigan
+    "HyperionAdvancedPointDefenseDrone",
 
     # Ranor
     "HyperionVoidCoop",
     "DuskWing",
 
     # Stetmann
-    "GaryStetmann",
-    "SuperGaryStetmann",
-
-    # Stetellites
     "PowerTowerStetmann",
     "PowerTowerStetmannDeactivated",
 
     # Stukov
+    "StukovAleksander",
     "StukovApocalisk",
-
-    "ALEKSANDERCRASH_PLACEHOLDER",
-    "StukovAleksanderCrashed",
-
     "StukovInfestBroodling",
 
-    "CODFlatbedTruck",
-    "CODFlatbedTruckFlying",
-
-    # Swan
     # Swann
     "DrakkenLaserDrillCoop",
-    "VoidCoopARES",
-
     "PerditionTurret",
     "PerditionTurretUnderground",
+    "KelMorianGrenadeTurret",
+    "KelMorianMissileTurret",
 
     # Tychus
-    # Tychus abilities
-    "TychusMedicTransportUnit",   # Medivac Pickup
-    "TychusMarauderHealingWard",  # Rattlesnake healing field
-    "TychusSCVAutoTurret",        # Sirius turret
-    "TychusWarhoundAutoTurret",   # Blaze/Sirius spawned turret variant
-
-    # Often useful to treat as ability units
+    "TychusMedicTransportUnit",
+    "TychusMarauderHealingWard",
+    "TychusSCVAutoTurret",
+    "TychusWarhoundAutoTurret",
     "TychusOdin",
+    "VoidCoopARES",
+
+    # Karax
+    "SOAPurifierBeamUnit",
+    "SOAThermalLanceTargeter",
+    "CarrierRepairDrone",
+    "SoACasterKarax",
+
 
     # Vorazun
     "DarkPylon",
     "OracleStasisTrap",
-
     "VorazunShadowGuard",
 
-    # Zaqara
-    "Scourge",
-    "HotSSwarmling",
-    "HotSSplitterlingBig",
-    "HotSSplitterlingMedium",
-    "BileLauncherZagara",
-    "HunterKiller",
-    "ZagaraCorruptor",
-    "ZagaraVoidCoop",
+    # Zagara
+    "BroodlingEscort",
 
     # Zeratul
-    "CommanderPrestigeZeratulTornadoesTornado",
-
     "Mohandar",
-
     "ZeratulSummonKarass",
     "ZeratulSummonVoidRay",
     "ZeratulSummonZealot",
-
     "PurificationOrbSmall",
-
-    "ZeratulCoopReviveBeacon",
-
-    "ProphecyArtifactHintUnit",
-    "ProphecyCamera",
-
-    "ZeratulACArtifact",
-    "ZeratulArtifactPickup1",
-    "ZeratulArtifactPickup2",
-    "ZeratulArtifactPickup3",
-    "ZeratulArtifactPickupUnlimited",
+    "ZeratulSuppressionCrystal",
+    "CommanderPrestigeZeratulTornadoesTornado",
 }

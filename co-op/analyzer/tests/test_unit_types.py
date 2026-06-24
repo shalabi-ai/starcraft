@@ -5,7 +5,7 @@ import sc2reader
 
 from replay.army_processor import ArmyProcessor
 
-TEST_DATA_DIR = Path(__file__).parent / "commanders/nova"
+TEST_DATA_DIR = Path(__file__).parent / "commanders/tychus/abathur"
 
 FILES = [p for p in TEST_DATA_DIR.rglob("*.SC2Replay") if p.is_file()]
 
@@ -25,7 +25,7 @@ def test_unit_types(file_path):
     global types1
     global COUNTER
     global FILES_PROBLEM
-    nova = str(file_path).split("nova/")[1]
+    nova = str(file_path).split("tychus/")[1]
     c = nova.split("/")[0]
     if c != commander and commander!="":
         types1 = set()

@@ -1,106 +1,107 @@
-TEMPORARY = {
+'''
+Commander Temporary Unit
+
+A unit created by a commander ability, hero ability, summon, calldown, or internal game mechanic that is not part of
+the player's persistent army and is expected to disappear automatically after a limited duration or after fulfilling a specific purpose.
+
+Characteristics
+
+A Commander Temporary Unit usually satisfies most of the following:
+
+Spawned by a top-bar ability, calldown, summon, or hero ability.
+Has a limited lifetime or purpose.
+Not produced from a normal production structure.
+Exists primarily as a temporary combat, support, or utility unit.
+Automatically despawns, expires, or is removed by game logic.
+Is not considered part of the player's standing army.
+
+Rule of thumb
+
+If the unit exists because an ability was activated and is expected to disappear on its own after completing its role,
+it is probably a Commander Temporary Unit.
+'''
+
+TEMPORARY_UNITS = {
+    # Generic
     "ACHeroSpawnPlacement",
 
-    "AlarakReviveBeacon",
-    "NovaReviveBeacon",
-
-    "CoopCasterAlarak",
-    "CoopCasterNova",
-
+    # Nova
     "HealingDrone",
-    "NovaDefensiveMatrixDrone",
     "NovaACLaserTurret",
-
+    "NovaBoombot",
+    "NovaBoombotBurrowed",
+    "NovaDefensiveMatrixDrone",
     "NovaGriffinBombingRunStrafer",
     "NovaGriffinBombingRunTargeter",
+    "NovaGriffinTransportUnit",
+    "NovaReviveBeacon",
 
-    "NovaBoombotBurrowed",
-
-    "Banshee_BlackOpsSpawnerUnit",
-    "Goliath_BlackOpsSpawnerUnit",
     "Marine_BlackOpsSpawnerUnit",
-    "Raven_BlackOpsSpawnerUnit",
-    "SiegeTank_BlackOpsSpawnerUnit",
     "Marauder_BlackOpsSpawnerUnit",
-    "Hellbat_BlackOpsSpawnerUnit",
     "Ghost_BlackOpsSpawnerUnit",
-    "Liberator_BlackOpsSpawnerUnit"
-
-    "AlarakSupplicantWarpTrainCreator",
-    "AlarakSupplicantWarpTrainDummy",
-
-    "Monitor",
-    "Egg",
-    "BanelingCocoon",
-    "Larva",
-
-    "CreepTumorBurrowed",
-    "CreepTumorUsed",
+    "Hellbat_BlackOpsSpawnerUnit",
+    "Goliath_BlackOpsSpawnerUnit",
+    "SiegeTank_BlackOpsSpawnerUnit",
+    "Raven_BlackOpsSpawnerUnit",
+    "Banshee_BlackOpsSpawnerUnit",
+    "Liberator_BlackOpsSpawnerUnit",
 
     # Abathur
-    "Broodling",
-    "CoopCasterAbathur",
-    "AbathurSymbioteLeviathan",
+    "BiomassPickup",
     "BrutaliskPlacement",
+    "ToxicNest",
+    "ToxicNestBurrowed",
+    "AbathurSymbioteBrutalisk",
+    "AbathurSymbioteLeviathan",
+
+    # Alarak
+    "AlarakReviveBeacon",
+    "AlarakSupplicantWarpTrainCreator",
+    "AlarakSupplicantWarpTrainDummy",
 
     # Artanis
     "CommanderPrestigeArtanisOrbitalStrikesArchon",
     "CommanderPrestigeArtanisOrbitalStrikesArchonPrecursor",
 
-    "SOAPylonPowerUnit",
-    "SOAPylonPowerAllyUnit",
-    "SoACasterArtanis",
-
-    # Dehaka revive / morph / placement
-    "DehakaCoopReviveCocoon",
-    "DehakaCoopReviveCocoonFootPrint",
+    # Dehaka
+    "DehakaCoopClone",
     "DehakaPlacement",
+
+    "DehakaDakrunStructure",
+    "DehakaGlevigStructure",
+    "DehakaMurvarStructure",
 
     "DehakaGlevigDeepTunnelPlacement",
     "GreaterNydusDestroyerDeepTunnelPlacement",
     "NydusDestroyerDeepTunnelPlacement",
 
-    "DehakaMutaliskLevel3FightMorph",
-    "DehakaMutaliskReviveEgg",
-
-    # Training eggs
-    "DehakaTrainEggDrone",
-    "DehakaTrainEggHydralisk",
-    "DehakaTrainEggRoach",
-    "DehakaTrainEggSwarmHost",
-    "DehakaTrainEggUltralisk",
-    "DehakaTrainEggZergling",
-
-    # Spawn precursors
-    "LocustMPPrecursor",
-
-    # Pickups
     "EssencePickup",
+    "DehakaMurvar",
+    "DehakaGlevig",
+    "DehakaDakrun",
 
     # Fenix
     "FenixAdeptShade",
     "FenixTalisAdeptPhaseShift",
+
     "FenixClolarionBomber",
     "FenixClolarionInterceptor",
+
     "FenixManaDummy1",
     "FenixManaDummy2",
     "FenixManaDummy3",
+
     "SentryFenixPhasing",
 
     # Han & Horner
-    "HHBattlecruiser_SpawnerUnit",
-    "HHWraith_SpawnerUnit",
-    "HHRaven_SpawnerUnit",
-    "HHMagneticMine_SpawnerUnit",
-
     "HHBomber",
     "HHGriffon",
 
     "HHMagneticMine",
     "HHMagneticMinePrep",
 
-    "CODFlatbedTruck",
-    "CODFlatbedTruckFlying",
+    "HornerAirFleetStrafer",
+    "HornerAirFleetTargeter",
 
     "HHD8CenterCluster",
     "HHD8CenterClusterUpgrade",
@@ -109,113 +110,116 @@ TEMPORARY = {
 
     "HHScrapPickup",
 
-    "SpiderMine",
-    "SpiderMineBurrowed",
-
-    "HornerAirFleetStrafer",
-    "HornerAirFleetTargeter",
-
-    # Karax
-    "Interceptor",
-    "CarrierRepairDrone",
-
-    "SOAPurifierBeamUnit",
-    "SOAThermalLanceTargeter",
-
-    "ZealotPurifierReviveCorpse",
-
-    # Kerr
-    "KerriganVoidCoopEconDrop1",
-    "KerriganVoidCoopEconDrop2",
-    "KerriganVoidCoopEconDrop3",
-    "KerriganVoidCoopEconDrop4",
-    "KerriganVoidCoopEconDrop5",
-    "KerriganVoidCoopEconDropLT1",
+    # Kerrigan
     "KerriganReviveCocoon",
-    "BroodlingEscort",
-    "TorrasqueChrysalis",
 
-    # Meng
+    # Mengsk
     "CommanderPrestigeMengskTrooperBoom",
-
     "TrooperMengskWeaponAAPickup",
+    "TrooperMengskWeaponFlamethrowerPickup",
     "TrooperMengskWeaponImprovedPickup",
 
-    "NukeMengsk",
 
     # Raynor
-    "MULE",
-    "HyperionVoidCoop",
-    "DuskWing",
-    "CoopCasterRaynor"
+    "HyperionAdvancedPointDefenseDrone",
 
-    # Stetmann production intermediates
-    "EggStetmann",
-    "LarvaStetmann",
+    # Stetmann
+    "PowerTowerStetmann",
+    "PowerTowerStetmannDeactivated",
 
-    # Swann
-    "VoidCoopARES",
+    # Stukov
+    "ALEKSANDERCRASH_PLACEHOLDER",
+    "StukovAleksanderCrashed",
+    "StukovAleksander",
 
-    # Wreckage states
-    "SiegeTankWreckage",
-    "ThorWreckageSwann",
+    "InfestedCivilianPlaceholder",
 
-
-    # Tychus
-    "TychusMedicTransportUnit",
-    "TychusMarauderHealingWard",
-    "TychusSCVAutoTurret",
-    "TychusWarhoundAutoTurret",
-
-
-    # Stukov cocoons
     "SICocoonInfestedCivilian",
     "SICocoonInfestedMarine",
     "SICocoonInfestedOverlord",
     "SICocoonInfestedSCV",
 
-    # Ability helpers
-    "InfestedCivilianPlaceholder",
-
-    "CODFlatbedTruck",
-    "CODFlatbedTruckFlying",
-
-    "ALEKSANDERCRASH_PLACEHOLDER",
-    "StukovAleksanderCrashed",
+    "SICocoonInfestedBanshee",
+    "SICocoonInfestedDiamondBack",
+    "SICocoonInfestedLiberator",
+    "SICocoonInfestedSiegeTank",
 
     "StukovInfestBroodling",
+    "StukovInfestedSiegeTankDeepTunnelPlacementUnit",
+    "StukovApocalisk",
 
+    # Swann
+    "PerditionTurret",
+    "PerditionTurretUnderground",
+
+    "KelMorianGrenadeTurret",
+    "KelMorianMissileTurret",
+
+    "ThorWreckageSwann",
+    "SiegeTankWreckage",
+
+    # Tychus
+    "TychusMedicTransportUnit",
+
+    "TychusSCVAutoTurret",
+    "TychusWarhoundAutoTurret",
+
+    "TychusMarauderHealingWard",
+
+    "TychusOdinPrecursor",
+
+    # Karax
+    "SOAPurifierBeamUnit",
+    "SOAThermalLanceTargeter",
+
+    "SOAPylonPowerUnit",
+    "SOAPylonPowerAllyUnit",
+
+    "CarrierRepairDrone",
 
     # Vorazun
+    "DarkPylon",
     "OracleStasisTrap",
-
-    # Shadow Guard
     "VorazunShadowGuard",
 
-    # zagara
-    "HunterKiller",
+    # Zagara
+    "BanelingCocoon",
+    "BroodlingEscort",
+    "TorrasqueChrysalis",
     "ZagaraReviveCocoon",
 
     # Zeratul
     "CommanderPrestigeZeratulTornadoesTornado",
-
-    "ZeratulDisruptorPhased",
-    "ZeratulStalkerGhost",
-
-    "Interceptor",
-
     "ProphecyArtifactHintUnit",
     "ProphecyCamera",
-
     "ZeratulACArtifact",
     "ZeratulArtifactPickup1",
     "ZeratulArtifactPickup2",
     "ZeratulArtifactPickup3",
     "ZeratulArtifactPickupUnlimited",
-
-    "PurificationOrbSmall",
-
     "ZeratulCoopReviveBeacon",
-
+    "ZeratulDisruptorPhased",
+    "ZeratulStalkerGhost",
+    "HotSSplitterlingBig"
+    "HotSSplitterlingMedium"
+    "PurificationOrbSmall",
+    "ZeratulSuppressionCrystal",
     "ZeratulXelNagaChargedCrystalCyan",
+    "ZeratulSummonKarass",
+
+    # Morph / helper entities
+    "Egg",
+    "EggStetmann",
+    "OverlordCocoon",
+    "DevourerCocoonMP",
+
+    "Larva",
+    "LarvaStetmann",
+
+    "CreepTumor",
+    "CreepTumorBurrowed",
+    "CreepTumorQueenNoCreep",
+    "CreepTumorUsed",
+
+    "SNARE_PLACEHOLDER",
 }

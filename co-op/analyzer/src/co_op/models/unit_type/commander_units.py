@@ -1,3 +1,22 @@
+'''
+Commander Unit
+
+A combat unit that is unique to a commander and is directly created, recruited, summoned, evolved, or controlled by
+that commander as a persistent member of their army.
+
+Characteristics:
+
+1- Unique to a commander.
+2- Controllable by the player.
+3- Persistent and expected to remain part of the army until destroyed.
+4- Represents a standing army asset rather than a temporary ability effect.
+
+Rule of thumb:
+
+If a player loses the unit and would naturally say, "I lost one of my units," it is probably a Commander Unit. If the
+entity primarily exists because an ability was activated and disappears after performing its function, it is probably
+a Commander Ability Asset.
+'''
 COMMANDER_UNITS = {
     # Alarak
     "Supplicant",
@@ -9,175 +28,130 @@ COMMANDER_UNITS = {
     "VoidRayTaldarim",
 
     # Abathur
-    "AbathurSymbioteBrutalisk"
-    "HotSLeviathan"
-    
-    # Dehaka
-    "DehakaCoop",
-    "DehakaCoopClone",
+    "AbathurSymbioteBrutalisk",
+    "Brutalisk",
+    "HotSLeviathan",
+    "RavagerAbathur",
+    "RoachVile",
 
-    # Dehaka pack leaders
-    "DehakaDakrun",
-    "DehakaGlevig",
-    "DehakaMurvar",
-
-    # Karax
-    "SoACasterKarax",
-
-    # Kerr
-    "HotSTorrasque",
-
-    # Fenix
-    "FenixCoop",
-    "AdeptFenix",
-    "SentryFenix",
-    "Immortal",
-    "FenixDragoon",
-    "FenixArbiter",
-
-    # Champions
-    "FenixKaldalisZealot",
-    "FenixTaldarinImmortal",
-    "FenixWarbringerColossus",
-    "FenixMojoScout",
-    "FenixTalisAdept",
-    "FenixClolarionCarrier",
-
-    # Han & Horner
-    "HHReaper",
-    "HHReaperFlying",
-    "HHHellion",
-    "HHHellionTank",
-    "HHWidowMine",
-    "HHWraith",
-    "HHRaven",
-    "HHBattlecruiser",
-
-    "HHMercenarySpaceStation",
-
-    # mengs
-    # Troopers
-    "TrooperMengsk",
-    "TrooperMengskAA",
-    "TrooperMengskFlamethrower",
-    "TrooperMengskImproved",
-
-    # Royal Guard
-    "MarauderMengsk",        # Aegis Guard
-    "GhostMengsk",           # Emperor's Shadow
-    "SiegeTankMengskSieged", # Shock Division
-    "MedivacMengsk",         # Intercessor
-    "ThorMengsk",            # Blackhammer
-    "VikingMengskFighter",
-    "VikingMengskAssault",   # Sky Fury
-    "BattlecruiserMengsk",   # Pride of Augustgrad
-    "RavenMengsk",
-    "RavenMengskSieged",
-
-    # Mutated troopers
-    "HydraliskMengsk",
-    "MutaliskMengsk",
-    "UltraliskMengsk",
-    "ZerglingMengsk",
 
     # Nova
     "Marine_BlackOps",
     "Marauder_BlackOps",
+    "Ghost_BlackOps",
+    "GhostFemale_BlackOps",
+    "HellbatBlackOps",
     "Goliath_BlackOps",
+    "SiegeTank_BlackOps",
+    "SiegeTankSieged_BlackOps",
     "Raven_BlackOps",
     "Banshee_BlackOps",
-    "SiegeTankSieged_BlackOps",
-    "HellbatBlackOps",
-    'GhostFemale_BlackOps',
-    'Ghost_BlackOps',
+    "Liberator_BlackOps",
     "LiberatorAG_BlackOps",
-    "Liberator_BlackOps"
-
-    # Stetmann
-    # Stetmann hero
-    "GaryStetmann",
-    "SuperGaryStetmann",
-
-    # Stetmann army
-    "ZerglingStetmann",
-    "HydraliskStetmann",
-    "CorruptorStetmann",
-    "UltraliskStetmann",
-
-    "OverlordStetmann",
-    "OverseerStetmann",
-    "OverseerStetmannSiegeMode",
-
-    # Stukov army
-    "SIInfestedCivilian",
-    "SIInfestedMarine",
-    "SIInfestedTrooper",
-    "SIVolatileInfested",
-    "SIOverlord",
-    "StukovInfestedBanshee",
-    "StukovInfestedDiamondBack",
-    "StukovInfestedSiegeTank",
-    "StukovInfestedSiegeTankUprooted",
-    "SILiberator",
 
 
     # Tychus
-    # Tychus heroes
-    "TychusCoop",
+    "TychusFirebat",
     "TychusGhost",
     "TychusMarauder",
     "TychusMedic",
     "TychusReaper",
     "TychusSpectre",
     "TychusWarhound",
+    "TychusHERC",
 
-    # Ultimate gear / hero calldown
-    "TychusOdin",
+    # Stukov
+    "SIInfestedMarine",
+    "SIInfestedTrooper",
+    "StukovInfestedDiamondBack",
+    "StukovInfestedSiegeTank",
+    "StukovInfestedBanshee",
+    "SILiberator",
 
-    # Vorazun army
-    "ZealotShakuras",
-    "StalkerShakuras",
-    "DarkTemplarShakuras",
+    # Dehaka
+    "DehakaRoachLevel2",
+    "DehakaHydraliskLevel2",
+    "DehakaMutaliskLevel3",
+    "DehakaGuardian",
+    "DehakaPrimalSwarmHost",
+    "DehakaUltraliskLevel3",
 
-    "CorsairMP",
-    "Oracle",
-    "VoidRay",
-    "VoidRayShakuras",
+    # Karax
+    "ZealotPurifier",
+    "SentryPurifier",
+    "ImmortalAiur",
+    "ColossusPurifier",
+    "PhoenixPurifier",
+    "CarrierAiur",
 
-    "DarkArchon",
-    "VorazunShadowGuard",
+    # Fenix
+    "AdeptFenix",
+    "SentryFenix",
+    "FenixKaldalisZealot",
+    "FenixTalisAdept",
+    "FenixTaldarinImmortal",
+    "FenixWarbringerColossus",
+    "FenixMojoScout",
+    "FenixClolarionCarrier",
 
-    # Zaqara
-    "QueenCoop",
-    "Scourge",
-    "HotSSwarmling",
-    "HotSSplitterlingBig",
-    "HotSSplitterlingMedium",
+
+    # Stetmann
+    "ZerglingStetmann",
+    "HydraliskStetmann",
+    "UltraliskStetmann",
+    "CorruptorStetmann",
 
     # Zeratul
-    "ZeratulCoop",
-
     "ZeratulDarkTemplar",
     "ZeratulStalker",
     "ZeratulSentry",
     "ZeratulImmortal",
     "ZeratulDisruptor",
-    "ZeratulObserver",
-    "ZeratulObserverSiegeMode",
-    "ZeratulWarpPrism",
-    "ZeratulWarpPrismPhasing",
 
-    "ZeratulDarkArchon",
-    "ZeratulHeroDarkArchon",
+    # Vorazun
+    "ZealotShakuras",
+    "StalkerShakuras",
+    "DarkTemplarShakuras",
+    "CorsairMP",
+    "VoidRayShakuras",
 
-    "ZeratulXelNagaConstruct",
-    "ZeratulXelNagaConstructCyan",
+    # Swann
+    "Hercules",
 
-    # Legion summons
-    "ZeratulSummonKarass",
-    "ZeratulSummonVoidRay",
-    "ZeratulSummonZealot",
+    # Han & Horner
+    "HHReaper",
+    "HHHellion",
+    "HHWidowMine",
+    "HHWraith",
+    "HHBattlecruiser",
+    "HHRaven",
 
-    # Hero summon
-    "Mohandar",
+    # Mengsk
+    "AegisGuard",
+    "ShockDivision",
+    "Blackhammer",
+    "SkyFury",
+    "EmperorShadow",
+    "PrideOfAugustgrad",
+
+    "HydraliskMengsk",
+    "MutaliskMengsk",
+    "UltraliskMengsk",
+    "ZerglingMengsk",
+    "TrooperMengsk",
+    "TrooperMengskAA",
+    "TrooperMengskFlamethrower",
+    "TrooperMengskImproved",
+
+    "BattlecruiserMengsk",
+    "ThorMengsk",
+    "GhostMengsk",
+    "MarauderMengsk",
+    "HydraliskMengsk",
+    "MutaliskMengsk",
+    "UltraliskMengsk",
+    "ZerglingMengsk",
+    "VikingMengskAssault",
+    "VikingMengskFighter",
+    "RavenMengsk",
 }

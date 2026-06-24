@@ -1,14 +1,25 @@
-from models.unit_type.army_unit import ARMY_UNITS
+from models.unit import Unit
+from models.unit_type.race_army_unit import RACE_ARMY_UNITS
 from models.unit_type.buildings_units import BUILDINGS_UNITS, BUILDING_KEYWORDS
 from models.unit_type.commander_ability import COMMANDER_ABILITY
 from models.unit_type.commander_units import COMMANDER_UNITS
-from models.unit_type.temporary_units import TEMPORARY
+from models.unit_type.temporary_units import TEMPORARY_UNITS
 
 
 class UnitTypes:
     def __init__(self, unit_type: str):
         self.type = unit_type.lower()
         self.unit_type = unit_type
+
+    def set_unit(self, unit: Unit):
+        unit.is_commander = self.is_commander()
+        unit.is_worker = self.is_worker()
+        unit.is_army = self.is_army()
+        unit.is_building = self.is_building()
+        unit.is_commander_unit = self.is_commander_unit()
+        unit.is_temporary = self.is_temporary()
+        unit.commander_ability = self.is_commander_ability()
+
     def is_worker(self)->bool:
         workers = {"DroneStetmann", "SCVMengsk", "TychusSCV", "HHSCV", "SISCV"}
         if self.unit_type in workers:
@@ -25,10 +36,13 @@ class UnitTypes:
         return self.__contains_keyword__(BUILDING_KEYWORDS)
 
     def is_temporary(self)->bool:
-        return self.__is_exist__(TEMPORARY)
+        return self.__is_exist__(TEMPORARY_UNITS)
+
+    def is_race_army(self) ->bool:
+        return self.__is_exist__(RACE_ARMY_UNITS)
 
     def is_army(self) ->bool:
-        if self.__is_exist__(ARMY_UNITS):
+        if self.__is_exist__(RACE_ARMY_UNITS):
             return True
 
         if self.is_commander():

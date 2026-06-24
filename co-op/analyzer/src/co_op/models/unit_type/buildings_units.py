@@ -200,6 +200,16 @@ BUILDINGS_UNITS = {
 
     "AutomatedAssimilatorZeratul",
 
+    # Tychus
+    "TychusArmory",
+    "TychusCommandCenter",
+    "TychusEngineeringBay",
+    "TychusGhostAcademy",
+    "TychusMedivacPlatform",
+    "TychusMercCompound",
+    "TychusResearchCenter",
+    "TychusResearchCenterUnlocked",
+
     "ZeratulGateway",
     "ZeratulCyberneticsCore",
     "ZeratulRoboticsFacility",

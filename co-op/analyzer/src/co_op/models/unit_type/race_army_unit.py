@@ -1,11 +1,12 @@
-ARMY_UNITS = {
+'''
+These are related to a race, but used sometimes as commander units for example Roach and Zealot.
+'''
+RACE_ARMY_UNITS = {
     # Abathur
-    "Brutalisk",
     "Mutalisk",
     "Roach",
     "Leviathan"
     "RavagerAbathur",
-    "AbathurSymbioteBrutalisk",
     "ZagaraCorruptor",
     "HunterKiller",
     "ZagaraVoidCoop",
@@ -19,57 +20,19 @@ ARMY_UNITS = {
     # Artanis
     "Zealot",
     "ZealotAiur",
-
     "Dragoon",
-
     "HighTemplar",
     "Archon",
-
     "ImmortalAiur",
-
     "PhoenixAiur",
-
     "Tempest",
-
-    # Dehaka combat units
-    "DehakaZerglingLevel2",
-    "DehakaRavasaur",
-    "DehakaRoachLevel2",
-    "DehakaRoachLevel3",
-    "DehakaHydraliskLevel2",
-    "DehakaMutaliskLevel3",
-    "DehakaGuardian",
-    "DehakaSwarmHost",
-    "DehakaSwarmHostBurrowed",
-    "DehakaPrimalSwarmHost",
-    "DehakaUltraliskLevel2",
-    "DehakaUltraliskLevel3",
-
-    # Pack leaders
-    "DehakaDakrun",
-    "DehakaGlevig",
-    "DehakaMurvar",
-
-    # Summons
-    "DehakaLocust",
-    "DehakaLocustFlying",
-    "DehakaCreeperFlying",
-    "DehakaNydusDestroyer",
-    "DehakaNydusDestroyerTimedNoFood",
 
     # Static combat entities
     "SpiderMine",
     "ImpalerDehakaBurrowed",
 
     # Karax
-    "ZealotPurifier",
-    "SentryPurifier",
     "SentryPhasing",
-
-    "ImmortalAiur",
-    "ColossusPurifier",
-
-    "PhoenixPurifier",
     "Carrier",
     "CarrierAiur",
 

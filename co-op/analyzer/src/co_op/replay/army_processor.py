@@ -2,6 +2,7 @@ import pandas as pd
 from pandas.core.interchange.dataframe_protocol import DataFrame
 from sc2reader.resources import Replay
 from models.unit import Unit
+from models.unit_types import UnitTypes
 from replay import FRAME_RATE
 from replay.replay import CoOpReplay
 
@@ -63,10 +64,12 @@ class ArmyProcessor:
                     owner=owner,
                     current_type=event.unit_type_name,
                     birth_frame= seconds,
-                    is_army=event.unit.is_army,
-                    is_building=event.unit.is_building,
-                    is_worker=event.unit.is_worker,
+                    #is_army=event.unit.is_army,
+                    #is_building=event.unit.is_building,
+                    #is_worker=event.unit.is_worker,
                 )
+                unit_types = UnitTypes(event.unit_type_name)
+                unit_types.set_unit(unit)
 
                 unit.type_history.append(
                     (event.frame, event.unit_type_name)
