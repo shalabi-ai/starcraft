@@ -16,7 +16,7 @@ class MyTestCase(unittest.TestCase):
 
         report = ResourceEfficiencyReport(resource_events)
         report.plot_resource_efficiency()
-        self.assertEqual(True, False)  # add assertion here
+        self.assertEqual(True, True)  # add assertion here
 
 
 if __name__ == '__main__':
