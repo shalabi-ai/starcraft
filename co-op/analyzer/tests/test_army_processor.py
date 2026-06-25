@@ -27,7 +27,7 @@ def test_ephemeral_units(file_path):
     replay1 = sc2reader.load_replay(str(file_path))
     COUNTER=COUNTER+1
     processor = ArmyProcessor(replay1)
-    units, unit_events = processor.process_replay()
+    units, unit_events, resource_events = processor.process_replay()
     ephemeral = processor.ephemeral_units(units)
     if any(item in ephemeral for item in not_ephemerals):
         FILES_PROBLEM.append(str(file_path))
@@ -39,6 +39,6 @@ def test_problem():
     file_path = "/home/mohammad/learn/starcraft/co-op/analyzer/tests/commanders/raynor/kerrigan/Dead of Night-normal-4.SC2Replay"
     replay1 = sc2reader.load_replay(str(file_path))
     processor = ArmyProcessor(replay1)
-    units, unit_events = processor.process_replay()
+    units, unit_events, resource_events = processor.process_replay()
     ephemeral = processor.ephemeral_units(units)
     print(ephemeral)

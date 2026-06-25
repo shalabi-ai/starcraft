@@ -1,25 +1,22 @@
 import unittest
 
-from pandas import DataFrame
-
-from replay.replay import CoOpReplay
-from replay.army_analyser import ArmyAnalyser
-from replay.army_processor import ArmyProcessor
 import sc2reader
 
+from replay.army_processor import ArmyProcessor
+from reports.resources.resource_efficiency_report import ResourceEfficiencyReport
 from tests import TESTS_FILES_PATH
 
 
 class MyTestCase(unittest.TestCase):
-    def test_temporary_units_set(self):
+    def test_something(self):
         replay1 = sc2reader.load_replay(TESTS_FILES_PATH)
 
         processor = ArmyProcessor(replay1)
         units, unit_events, resource_events = processor.process_replay()
 
-        u = processor.temporary_units(units)
-        self.assertEqual(True, True)  # add assertion here
-
+        report = ResourceEfficiencyReport(resource_events)
+        report.plot_resource_efficiency()
+        self.assertEqual(True, False)  # add assertion here
 
 
 if __name__ == '__main__':

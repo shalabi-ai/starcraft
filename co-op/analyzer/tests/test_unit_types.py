@@ -34,7 +34,7 @@ def test_unit_types(file_path):
     replay1 = sc2reader.load_replay(str(file_path))
     COUNTER=COUNTER+1
     processor = ArmyProcessor(replay1)
-    units, unit_events = processor.process_replay()
+    units, unit_events, resource_events = processor.process_replay()
 
 
     for unit in units.values():

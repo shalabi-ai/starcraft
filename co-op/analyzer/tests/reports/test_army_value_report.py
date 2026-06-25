@@ -17,7 +17,7 @@ class MyTestCase(unittest.TestCase):
         replay1 = sc2reader.load_replay(path)
 
         processor = ArmyProcessor(replay1)
-        units, unit_events = processor.process_replay()
+        units, unit_events, resource_events = processor.process_replay()
 
         coopReplay = CoOpReplay(replay1)
         players = coopReplay.getPlayerMap()

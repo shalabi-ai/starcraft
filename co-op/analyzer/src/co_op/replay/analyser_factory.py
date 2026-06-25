@@ -28,7 +28,7 @@ class AnalyserFactory:
         players = coopReplay.getPlayerMap()
 
         army_processor = ArmyProcessor(replay1)
-        units, units_events = army_processor.process_replay()
+        units, units_events, resource_events = army_processor.process_replay()
 
         analyser = ArmyAnalyser(units_events, players)
         return analyser
