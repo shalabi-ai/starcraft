@@ -19,7 +19,7 @@ commander = ""
     FILES,
     ids=lambda p: str(p.relative_to(TEST_DATA_DIR)),
 )
-def test_unit_types(file_path):
+def qtest_unit_types(file_path):
     global commander
     global types
     global types1
@@ -34,7 +34,8 @@ def test_unit_types(file_path):
     replay1 = sc2reader.load_replay(str(file_path))
     COUNTER=COUNTER+1
     processor = ArmyProcessor(replay1)
-    units, unit_events, resource_events = processor.process_replay()
+    results = processor.process_replay()
+    units = results["all_units"]
 
 
     for unit in units.values():

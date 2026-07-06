@@ -12,7 +12,8 @@ class MyTestCase(unittest.TestCase):
         replay1 = sc2reader.load_replay(TESTS_FILES_PATH)
 
         processor = ArmyProcessor(replay1)
-        units, unit_events, resource_events = processor.process_replay()
+        results = processor.process_replay()
+        resource_events = results["resource_events"]
 
         report = ResourceEfficiencyReport(resource_events)
         report.plot_resource_efficiency()

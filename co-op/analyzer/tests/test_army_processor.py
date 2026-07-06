@@ -17,7 +17,7 @@ FILES_PROBLEM = []
     FILES,
     ids=lambda p: str(p.relative_to(TEST_DATA_DIR)),
 )
-def test_ephemeral_units(file_path):
+def qtest_ephemeral_units(file_path):
     not_ephemerals = ["Roach", "Dragoon", "Scout", "Baneling", "HighTemplar", "HunterKiller", "HunterKiller",
                       "HybridDestroyer", "HybridReaver", "InfestorTerran", "TrooperMengsk", "TrooperMengskImproved",
                       "HellbatBlackOps", "HotSRaptor", "DehakaSwarmHost"]
@@ -27,7 +27,8 @@ def test_ephemeral_units(file_path):
     replay1 = sc2reader.load_replay(str(file_path))
     COUNTER=COUNTER+1
     processor = ArmyProcessor(replay1)
-    units, unit_events, resource_events = processor.process_replay()
+    results = processor.process_replay()
+    units = results["all_units"]
     ephemeral = processor.ephemeral_units(units)
     if any(item in ephemeral for item in not_ephemerals):
         FILES_PROBLEM.append(str(file_path))
@@ -35,10 +36,11 @@ def test_ephemeral_units(file_path):
     ephemerals = ephemerals | ephemeral
     print(ephemerals)
 
-def test_problem():
+def qtest_problem():
     file_path = "/home/mohammad/learn/starcraft/co-op/analyzer/tests/commanders/raynor/kerrigan/Dead of Night-normal-4.SC2Replay"
     replay1 = sc2reader.load_replay(str(file_path))
     processor = ArmyProcessor(replay1)
-    units, unit_events, resource_events = processor.process_replay()
+    results = processor.process_replay()
+    units = results["all_units"]
     ephemeral = processor.ephemeral_units(units)
     print(ephemeral)

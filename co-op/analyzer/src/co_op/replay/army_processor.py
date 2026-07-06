@@ -2,6 +2,7 @@ import pandas as pd
 from pandas.core.interchange.dataframe_protocol import DataFrame
 from sc2reader.resources import Replay
 from models.unit import Unit
+from models.unit_cost import UnitCost, UNIT_COSTS
 from models.unit_types import UnitTypes
 from replay import FRAME_RATE
 from replay.replay import CoOpReplay
@@ -42,11 +43,16 @@ class ArmyProcessor:
         players = coopReplay.getPlayerMap()
         all_units = {}
         unit_events = []
+        army_value_timeline = dict()
+        # unit_type key, unit_cost is the value
+        unit_cost_dict = dict()
+        # contain list of units born between PlayerStatsEvent where key is player_id
+        army_unit_born_dict = dict()
 
-        olg_mineral = 0
-        old_gas = 0
-        current_mineral = 0
-        current_gas = 0
+        old_mineral = dict()
+        old_gas = dict()
+        current_mineral = dict()
+        current_gas = dict()
         resource_events = []
         for event in self.replay.tracker_events:
             seconds = self.frame_to_seconds(event.frame)
@@ -76,6 +82,16 @@ class ArmyProcessor:
                 unit_types = UnitTypes(event.unit_type_name)
                 unit_types.set_unit(unit)
 
+                if event.name == "UnitBornEvent" and (unit_types.is_race_army() or unit_types.is_commander_unit() or unit_types.is_commander()):
+                    old_list = army_unit_born_dict.get(owner, [])
+                    old_list.append({
+                        "unit_type": event.unit_type_name,
+                        "unit_id": event.unit_id,
+                        "player_id": owner,
+                        "frame": event.frame,
+                    })
+                    army_unit_born_dict[owner] = old_list
+
                 unit.type_history.append(
                     (event.frame, event.unit_type_name)
                 )
@@ -95,14 +111,36 @@ class ArmyProcessor:
             # PlayerStatsEvent
             #-------------------------
             elif event.name == "PlayerStatsEvent":
-                old_gas = current_gas
-                old_mineral = current_mineral
-                current_gas = event.vespene_current
-                current_mineral = event.minerals_current
+                player_id = event.pid
+                if player_id is None or player_id == 0 or not player_id in players:
+                    continue
+                # old_gas[player_id] = current_gas.get(player_id, 0)
+                # old_mineral[player_id] = current_mineral.get(player_id, 0)
+                # current_gas[player_id] = event.vespene_used_current_army
+                # current_mineral[player_id] = event.minerals_used_current_army
+                #
+                # army_units = army_unit_born_dict.get(player_id, None) #
+                # self.compute_unit_cost(unit_cost_dict, army_units,
+                #                        old_gas.get(player_id, 0), old_mineral.get(player_id, 0),
+                #                        current_gas.get(player_id, 0), current_mineral.get(player_id, 0))
+                # army_unit_born_dict[event.pid] = []
+
+                minerals = event.minerals_used_current_army
+                gas = event.vespene_used_current_army
+                old = army_value_timeline.get(player_id, [])
+                old.append( {
+                    "seconds": event.second,
+                    "player_id": player_id,
+                    "minerals": minerals,
+                    "gas": gas,
+                    "total": minerals + gas,
+                })
+                army_value_timeline[player_id] = old
+
                 resource_events.append({
                     "frame": event.frame,
                     "time": event.second,
-                    "player_id": event.pid,
+                    "player_id": player_id,
                     "mineral_current": event.minerals_current,
                     "gas_current": event.vespene_current,
                     "gas_collection_rate": event.vespene_collection_rate,
@@ -203,7 +241,14 @@ class ArmyProcessor:
 
         unit_events.sort(key=lambda e: e["time"])
 
-        return all_units, unit_events, pd.DataFrame(resource_events)
+        result = {
+            "all_units": all_units,
+            "unit_events": unit_events,
+            "resource_events": pd.DataFrame(resource_events),
+            "army_value_timeline": army_value_timeline,
+        }
+
+        return result
 
     # ephemeral unit are units like NovaGriffinBombingRunTargeter, NovaGriffinBombingRunStrafer, LocustFlying, ToxicNest, NovaBoombotBurrowed
     # When we compute army value we want to avoid these units. These unites are has short live,
@@ -301,3 +346,59 @@ class ArmyProcessor:
             ]
         )
 
+    def compute_unit_cost(self, unit_cost_dict, army_units, old_gas, old_mineral, current_gas,
+                          current_mineral, call_number=1):
+        if army_units == None or len(army_units) == 0:
+            return
+        # step: 1
+        # If army unite items has the same unit type, or has single item
+        all_same = len({p["unit_type"]  for p in army_units}) <= 1
+        if len(army_units) == 1 or all_same:
+            unit = army_units[0]
+            unit_type = unit["unit_type"]
+            gas = max((current_gas - old_gas), 0)/len(army_units)
+            mineral = max((current_mineral - old_mineral), 0)/len(army_units)
+
+            # Notice: this will be always the source of truth, so that is why it is ok to override old value if exists
+            unit_cost_dict[unit_type] =  UnitCost('unit_type', mineral, gas, 0.0)
+            return
+
+
+        avg_mineral = current_mineral /len(army_units)
+        avg_gas = current_gas /len(army_units)
+
+        new_mineral = current_mineral
+        new_gas = current_gas
+        new_army_list = []
+        for unit in army_units:
+            unit_type = unit["unit_type"]
+            unit_cost = unit_cost_dict.get(unit_type, None)
+            if unit_cost is not None:
+                current_mineral -= unit_cost.minerals
+                current_gas -= unit_cost.gas
+
+                new_mineral -= unit_cost.mineral
+                new_gas -= unit_cost.gas
+                continue  # unit cost already exist no need to compute it
+
+            unit_cost = UNIT_COSTS.get(unit_type, None)
+            if unit_cost is not None:
+                current_mineral -= unit_cost.mineral
+                current_gas -= unit_cost.gas
+
+                new_mineral -= unit_cost.mineral
+                new_gas -= unit_cost.gas
+                continue
+
+            # Now these calculations are wrong, we will debends that this can be fixed later(step 1)
+            # We must do this, at least we have some values even if they are not exact
+            if call_number != 1:
+                unit_cost_dict[unit_type] = UnitCost('unit_type', avg_mineral, avg_gas, 0.0)
+            current_mineral -= avg_mineral
+            current_gas -= avg_gas
+            new_army_list.append(unit)  # this will be used for the second call
+
+        if call_number == 1:
+            # call the method again to try
+            self.compute_unit_cost(unit_cost_dict, new_army_list, old_gas, old_mineral, new_gas,
+                                   new_mineral, 2)
